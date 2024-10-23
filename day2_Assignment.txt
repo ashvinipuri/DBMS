@@ -1,0 +1,404 @@
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE
+    -> 
+    -> Snum number(4)
+    -> Sname varchar2(10)
+    -> City varchar2(10)
+    -> Comm number(3,2));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Snum number(4)
+Sname varchar2(10)
+City varchar2(10)
+Comm number(3,2))' at line 3
+mysql> system cls
+mysql> tee D:\DATABASE ASHVINI\day2_Assignment.txt
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE(
+    -> Snum number(4),
+    -> Snum number(4),
+    -> Sname varchar2(10),
+    -> ^C
+mysql> 
+mysql> sysytem cls
+    -> 
+    -> system cls
+    -> ^C
+mysql> 
+mysql> sysytem cls
+    -> ^C
+mysql> system cls
+mysql> tee D:\DATABASE ASHVINI\day2_Assignment.txt
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE(
+    -> Snum number(4),
+    -> Sname varchar2(10),
+    -> City varchar2(10),
+    -> ^C
+mysql> create table CUSTOMERS(
+    -> Cnum number(4),
+    -> Cname varchar2(10),
+    -> City varchar2(10),
+    -> Rating number(4),
+    -> ^C
+mysql> system cls
+mysql> tee D:\DATABASE ASHVINI\day2_Assignment.txt
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE(
+    -> Snum number(4),
+    -> Sname varchar2(10),
+    -> City varchar2(10),
+    -> Comm number(3,2));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number(4),
+Sname varchar2(10),
+City varchar2(10),
+Comm number(3,2))' at line 2
+mysql> create table SALESPEOPLE(
+    -> Snum numeric(4),
+    ->  Sname varchar2(10),
+    -> ^C
+mysql> system cls
+mysql> tee D:\DATABASE ASHVINI\day2_Assignment.txt
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE(
+    -> Snum numeric(4),
+    -> Sname varchar(10),
+    -> City varchar(10),
+    -> Comm number(3,2));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number(3,2))' at line 5
+mysql> create table SALESPEOPLE(
+    -> 
+    ->  Snum numeric(4),
+    -> Sname varchar(10),
+    -> > City varchar(10),
+    ->  Comm numeric(3,2));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> City varchar(10),
+ Comm numeric(3,2))' at line 5
+mysql> sysytem cls
+    -> system cls
+    -> ^C
+mysql> 
+mysql> system cls
+mysql> tee D:\DATABASE ASHVINI\day2_Assignment.txt
+mysql> use mycdac;
+Database changed
+mysql> create table SALESPEOPLE(
+    -> Snum numeric(4),
+    -> Sname varchar(10),
+    -> City varchar(10),
+    -> Comm numeric(3,2));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc SALESPEOPLE;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| Snum  | decimal(4,0) | YES  |     | NULL    |       |
+| Sname | varchar(10)  | YES  |     | NULL    |       |
+| City  | varchar(10)  | YES  |     | NULL    |       |
+| Comm  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table CUSTOMERS(
+    -> Cnum numeric(4),
+    -> Cname varchar(10),
+    -> City varchar(10),
+    -> Rating numeric(4),
+    -> Snum numeric(4));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc  CUSTOMERS;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| Cnum   | decimal(4,0) | YES  |     | NULL    |       |
+| Cname  | varchar(10)  | YES  |     | NULL    |       |
+| City   | varchar(10)  | YES  |     | NULL    |       |
+| Rating | decimal(4,0) | YES  |     | NULL    |       |
+| Snum   | decimal(4,0) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table ORDERS(
+    -> Onum numeric(4),
+    -> Amt numeric(7,2),
+    -> Odate date,
+    -> ^C
+mysql> Cnum numeric(4),
+    -> Snum numeric(4));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Cnum numeric(4),
+Snum numeric(4))' at line 1
+mysql>  create table ORDERS(
+    -> Onum numeric(4),
+    -> Amt numeric(7,2),
+    ->  Odate date,
+    ->  Cnum numeric(4),
+    -> Snum numeric(4));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc ORDERS;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| Onum  | decimal(4,0) | YES  |     | NULL    |       |
+| Amt   | decimal(7,2) | YES  |     | NULL    |       |
+| Odate | date         | YES  |     | NULL    |       |
+| Cnum  | decimal(4,0) | YES  |     | NULL    |       |
+| Snum  | decimal(4,0) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into SALES PEOPLE values(1001,'Peel','London',.12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PEOPLE values(1001,'Peel','London',.12)' at line 1
+mysql> insert into SALESPEOPLE values(1001,'Peel','London',.12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into SALESPEOPLE values(1001,'Peel','London',.12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into SALESPEOPLE valuesinsert into SALESPEOPLE values(1002 ,'Serres', 'SanJose',.13);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valuesinsert into SALESPEOPLE values(1002 ,'Serres', 'SanJose',.13)' at line 1
+mysql> insert into SALESPEOPLE valuesinsert into SALESPEOPLE values(1002 ,'Serres',
+    -> ^C
+mysql> 
+mysql>  insert into SALESPEOPLE values(1002,'serres','San Jose',.13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into SALESPEOPLE values(1004,'Motika','london',.11);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into SALESPEOPLE values(1007,'Rifkin','Barcelona',.15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into SALESPEOPLE values(1003,'Axelrod','New York',.10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from  SALESPEOPLE;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | serres  | San Jose  | 0.13 |
+| 1004 | Motika  | london    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql>  insert into SALES PEOPLE values(2001,'Hoffman','London',100,1001);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PEOPLE values(2001,'Hoffman','London',100,1001)' at line 1
+mysql>  insert into CUSTOMERS values(2001,'Hoffman','London',100,1001);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into CUSTOMERS values(2002,'jiovanni','Rome',200,1003);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into CUSTOMERS values(2001,'Hoffman','London',100,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),from emp group by deptno order by deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp group by deptno order by deptno' at line 1
+mysql> elect deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),from emp group b
+    -> y deptno order by deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'elect deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),from emp group b
+y de' at line 1
+mysql> select deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),from emp group by deptno order by deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp group by deptno order by deptno' at line 1
+mysql>  select deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),
+    -> from emp
+    ->  group by deptno 
+    ->  order by deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp
+ group by deptno 
+ order by deptno' at line 2
+mysql> 
+mysql> select deptno,sum(sal) as totsal,min(sal),max(sal),avg(sal),
+    -> from emp group by deptno
+    -> order by deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp group by deptno
+order by deptno' at line 2
+mysql> select job, count(empno) totemp
+    -> from emp
+    -> group by job;
++-----------+--------+
+| job       | totemp |
++-----------+--------+
+| CLERK     |      4 |
+| SALESMAN  |      4 |
+| MANAGER   |      3 |
+| ANALYST   |      2 |
+| PRESIDENT |      1 |
++-----------+--------+
+5 rows in set (0.03 sec)
+
+mysql> select deptno,count(empno) totemp
+    -> from emp
+    -> group by deptno
+    -> order by deptno;
++--------+--------+
+| deptno | totemp |
++--------+--------+
+|     10 |      3 |
+|     20 |      5 |
+|     30 |      6 |
++--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select deptno,comm,ename,count(empno) totemp
+    -> from emp
+    -> group by deptno,comm;
+ERROR 1055 (42000): Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'mycdac.emp.ENAME' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql>  select deptno,comm,ename,count(empno) totemp
+    ->  from emp
+    ->  group by deptno,comm,ename;
++--------+---------+--------+--------+
+| deptno | comm    | ename  | totemp |
++--------+---------+--------+--------+
+|     20 |    NULL | SMITH  |      1 |
+|     30 |  300.00 | ALLEN  |      1 |
+|     30 |  500.00 | WARD   |      1 |
+|     20 |    NULL | JONES  |      1 |
+|     30 | 1400.00 | MARTIN |      1 |
+|     30 |    NULL | BLAKE  |      1 |
+|     10 |    NULL | CLARK  |      1 |
+|     20 |    NULL | SCOTT  |      1 |
+|     10 |    NULL | KING   |      1 |
+|     30 |    0.00 | TURNER |      1 |
+|     20 |    NULL | ADAMS  |      1 |
+|     30 |    NULL | JAMES  |      1 |
+|     20 |    NULL | FORD   |      1 |
+|     10 |    NULL | MILLER |      1 |
++--------+---------+--------+--------+
+14 rows in set (0.00 sec)
+
+mysql> insert into CUSTOMERS values(2003,'Liu','San Jose',200,1002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into CUSTOMERS values(2004,'Grass','Berlin',300,1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into CUSTOMERS values(2006,'Clemens','London',100,1001);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql>  insert into CUSTOMERS values(2008,'Cisneros','San Jose',300,1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into CUSTOMERS values(2007,'Pereira','Rome',100,1004);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from CUSTOMERS;
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | jiovanni | Rome     |    200 | 1003 |
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql>  insert into ORDERS values(3001,18.69,'03-OCT-1990',2008,1007);
+ERROR 1292 (22007): Incorrect date value: '03-OCT-1990' for column 'Odate' at row 1
+mysql>  insert into ORDERS values(3001,18.69,'1990-OCT-03',2008,1007);
+ERROR 1292 (22007): Incorrect date value: '1990-OCT-03' for column 'Odate' at row 1
+mysql> insert into ORDERS values(3001,18.69,'1990-10-03',2008,1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into ORDERS values(3003,767.19,'1990-10-03',2001,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> ^C
+mysql>  insert into ORDERS values(3002,1900.10,'1990-10-03',2007,1004);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into ORDERS values(3005,5160.45,'1990-10-03',2003,1002);
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  insert into ORDERS values(3006,1098.16,'1990-10-03',2008,1007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into ORDERS values(3006,1098.16,'1990-10-03',2008,1007);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Query OK, 1 row affected (0.01 sec)
+    -> ^C
+mysql>  insert into ORDERS values(3009,1713.23,'1990-10-04',2002,1003);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into ORDERS values(3007,75.75,'1990-10-04',2004,1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into ORDERS values(3008,4723.00,'1990-10-05',2006,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into ORDERS values(3010,1309.95,'1990-10-06',2004,1002);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into ORDERS values(3011,9881.88,'1990-10-06',2006,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from ORDERS;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9881.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+11 rows in set (0.00 sec)
+
+mysql> select*from ORDERS where amt>1000;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9881.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+8 rows in set (0.00 sec)
+
+mysql> select*from SALESPEOPLE where (city='London'&& comm>0.10);
++------+--------+--------+------+
+| Snum | Sname  | City   | Comm |
++------+--------+--------+------+
+| 1001 | Peel   | London | 0.12 |
+| 1001 | Peel   | London | 0.12 |
+| 1004 | Motika | london | 0.11 |
++------+--------+--------+------+
+3 rows in set, 1 warning (0.01 sec)
+
+mysql> select*from CUSTOMER where(city='Rome' && ratings<=100);
+ERROR 1054 (42S22): Unknown column 'city' in 'where clause'
+mysql>  select*from CUSTOMERS where(city='Rome' && ratings<=100);
+ERROR 1054 (42S22): Unknown column 'ratings' in 'where clause'
+mysql> select*from CUSTOMERS where(city='Rome' && rating<=100);
++------+---------+------+--------+------+
+| Cnum | Cname   | City | Rating | Snum |
++------+---------+------+--------+------+
+| 2007 | Pereira | Rome |    100 | 1004 |
++------+---------+------+--------+------+
+1 row in set, 1 warning (0.00 sec)
+
