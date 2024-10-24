@@ -1,0 +1,81 @@
+* sorting on multiple cols
+-> select ename,deptno,sal
+   from emp
+  order by deptno,sal,ename;
+
+
+* grouping  on multiple cols
+-> select deptno,job,count(empno) as  totemp
+   from emp
+  group by deptno,job
+order by deptno;
+
+
+ * having
+-> select deptno,sum(sal) as totsal
+from emp
+group by deptno
+having sum(sal)>10000;
+
+* using all the clauses
+-> select deptno,sum(sal) as totsal
+from emp
+where deptno in(10,20) and sal>800
+group by deptno
+having sum(sal)>10000
+order by deptno;
+
+* create table dept1(
+deptno numeric(2) primary key,
+dname varchar(20) not null,
+loc varchar(20) not null);
+
+* insert into dept1 values(19,'acct','mum');
+   insert into dept1 values(20,'fin','mum');
+  select*from dept1;
+ 
+*  error:
+    insert into dept1 values(30,'fin',null);
+    insert into dept1 values(30,null,null);
+
+* to drop the table
+ drop table emp1;
+
+*  emp1
+  empno numeric(4) pk
+ename varchar(20) nn
+sal float(10,2) >10000
+deptno numeric(2) fk
+city varchar(20) pune,nashik,bang
+pan  char(10) uk
+
+
+create table emp1 (
+empno numeric(4) primary key,
+ename varchar(20) not null,
+sal float(10,2) check(sal>10000),
+deptno numeric(2),
+city varchar(20) check(city in('pune','mum','nashik')),
+pan char(10) unique,
+foreign key (deptno) references dept1(deptno));
+
+
+insert into dept1 values(30,'gov','nashik');
+insert into dept1 values(40,'clg','bang');
+
+insert into emp1 values(1,'Girish',20000,30,'nashik','p001');
+insert into emp1 values(2,'Shinde',30000,19,'mum','p002');
+
+* create table emp1(
+empno varchar(4) check (empno like 'e%') primary key,
+ename varchar(20) not null,
+sal float (10,2) not null,
+check (sal >10000),
+deptno numeric (2),
+city varchar(20) default 'nashik'
+check (city in('pune','mum','nashik')),
+pan char(10) unique,
+foreign key(deptno) references dept1(deptno));
+
+insert into emp1 values('e001','Ashvini',15000,19,default,'p001');
+insert into emp1 values('e002','Ashmol',25000,20,'pune','p002');
