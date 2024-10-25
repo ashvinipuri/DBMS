@@ -1,0 +1,759 @@
+mysql> show tables;
++------------------+
+| Tables_in_mycdac |
++------------------+
+| customer         |
+| customers        |
+| dept             |
+| dept1            |
+| emp              |
+| emp1             |
+| employee         |
+| orders           |
+| salespeople      |
++------------------+
+9 rows in set (0.06 sec)
+
+mysql> create table emp1(
+    -> empno numeric(4)  check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20) check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+ERROR 1050 (42S01): Table 'emp1' already exists
+mysql> create table emp1(
+    -> empno numeric(4) primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20) check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+ERROR 1050 (42S01): Table 'emp1' already exists
+mysql> select8from emp1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select8from emp1' at line 1
+mysql> select * from emp1;
++-------+---------+----------+--------+--------+------+
+| empno | ename   | sal      | deptno | city   | pan  |
++-------+---------+----------+--------+--------+------+
+| e001  | Ashvini | 15000.00 |     19 | nashik | p001 |
+| e002  | Ashmol  | 25000.00 |     20 | pune   | p002 |
++-------+---------+----------+--------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> create table emp1(
+    -> empno numeric(4)  create table emp1(
+    -> empno numeric(4) primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20) check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table emp1(
+empno numeric(4) primary key,
+ename varchar(20) not null,
+sal' at line 2
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+ERROR 1050 (42S01): Table 'emp1' already exists
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+ERROR 1050 (42S01): Table 'emp1' already exists
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> select *from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     19 | acct  | mum    |
+|     20 | fin   | mum    |
+|     30 | gov   | nashik |
+|     40 | clg   | bang   |
++--------+-------+--------+
+4 rows in set (0.02 sec)
+
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno)
+    -> on delete cascade
+    -> on update cacade);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cacade)' at line 12
+mysql> 
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno)
+    -> on delete cascade
+    -> on update cascade);
+ERROR 1050 (42S01): Table 'emp1' already exists
+mysql> 
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table emp1(
+    -> empno numeric(4) check(empno like 'e%')primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) 
+    -> check(sal>10000),
+    -> dno numeric(2),
+    -> city varchar(20)default 'nashik'
+    ->  check(city in('pune','mum','nashik')),
+    -> pan char(10)unique,
+    -> foreign key(dno) references dept1(deptno)
+    -> on delete cascade
+    -> on update cascade);
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> insert into emp1(ename,empno,sal,deptno) values('Ashmol',5,700000,10);
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> insert into emp1 values (1,'Ash',30000,20,null, null);
+ERROR 3819 (HY000): Check constraint 'emp1_chk_1' is violated.
+mysql>  insert into emp1 values (1,'Ashmol',30000,20,null,null)
+    -> ^C
+mysql> system cls
+mysql> desc dept1;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| deptno | decimal(2,0) | NO   | PRI | NULL    |       |
+| dname  | varchar(20)  | NO   |     | NULL    |       |
+| loc    | varchar(20)  | NO   |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into emp1(ename,empno,sal,deptno,city,pan) values('Ashmol','e001',700000,10,'pune','p001');
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> select*from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     19 | acct  | mum    |
+|     20 | fin   | mum    |
+|     30 | gov   | nashik |
+|     40 | clg   | bang   |
++--------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql>  insert into emp1(ename,empno,sal,deptno,city,pan) values('Ashmol','e001',700000,10,'pune','p001');
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> select *from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     19 | acct  | mum    |
+|     20 | fin   | mum    |
+|     30 | gov   | nashik |
+|     40 | clg   | bang   |
++--------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql>  insert into emp1(ename,empno,sal,deptno,city,pan) values('Ashmol','e001',700000,10,'pune','p001');
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> system cls
+mysql> create table emp2(
+    ->    empno int,
+    ->    ename varchar(20),
+    ->    sal,int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',int)' at line 4
+mysql> system cls
+mysql> create table emp2(
+    ->    empno int,
+    ->    ename varchar(20),
+    ->    sal  int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> 
+mysql> add a col
+    -> alter table emp2
+    -> add  comm numeric(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add a col
+alter table emp2
+add  comm numeric(10,2)' at line 1
+mysql> alter table emp2
+    -> add  comm numeric(10,2);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> add col email varchar(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add col email varchar(10,2)' at line 1
+mysql> col email varchar(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'col email varchar(10,2)' at line 1
+mysql>  alter table emp2
+    -> drop comm;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> alter table emp2
+    -> modify ename varchar(40);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table emp2
+    ->      add primary key(empno);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql>   alter table emp2
+    -> change sal salary int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  add col email varchar(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add col email varchar(10,2)' at line 1
+mysql>  alter table emp2
+    -> rename to newemp2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table newemp2
+    -> add pan char (10) first;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> alter table newemp2
+    ->      add divno char(10) after ename;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc newemp2;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| pan    | char(10)    | YES  |     | NULL    |       |
+| empno  | int         | NO   | PRI | NULL    |       |
+| ename  | varchar(40) | YES  |     | NULL    |       |
+| divno  | char(10)    | YES  |     | NULL    |       |
+| salary | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table newemp2
+    ->        add check(salary>10000);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create view v1
+    ->      as 
+    ->     select*from emp;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>  select*from v1;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+14 rows in set (0.01 sec)
+
+mysql>  create view v2
+    -> as select empno,ename,hiredate from emp
+    -> where deptno=10;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select* from v2;
++-------+--------+------------+
+| empno | ename  | hiredate   |
++-------+--------+------------+
+|  7782 | CLARK  | 2012-01-06 |
+|  7839 | KING   | 2012-01-15 |
+|  7934 | MILLER | 2012-05-02 |
++-------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> select*from v2;
++-------+--------+------------+
+| empno | ename  | hiredate   |
++-------+--------+------------+
+|  7782 | CLARK  | 2012-01-06 |
+|  7839 | KING   | 2012-01-15 |
+|  7934 | MILLER | 2012-05-02 |
++-------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create view v4
+    -> as select empno,ename,hiredate from emp
+    -> where (sal between 1000 and 2000)
+    -> and deptno=10;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create view v4
+    -> as 
+    -> select empno,ename,hiredate ,job,deptno 
+    -> from emp
+    -> where (sal between 1000 and 2000)
+    -> and deptno=10;
+ERROR 1050 (42S01): Table 'v4' already exists
+mysql> 
+mysql> select*fromv4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fromv4' at line 1
+mysql> drop view v4;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create view v4
+    ->        as 
+    ->      select empno,ename,hiredate ,job,deptno ,sal
+    ->     from emp
+    ->      where(sal between 1000 and 2000)
+    ->     and deptno=10;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> select*from v4;
++-------+--------+------------+-------+--------+---------+
+| empno | ename  | hiredate   | job   | deptno | sal     |
++-------+--------+------------+-------+--------+---------+
+|  7934 | MILLER | 2012-05-02 | CLERK |     10 | 1300.00 |
++-------+--------+------------+-------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into values(1,'2024-2-2', 'manager',10,1200);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(1,'2024-2-2', 'manager',10,1200)' at line 1
+mysql>  insert into values(1,'2024-2-2', 'manager',10,1200);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(1,'2024-2-2', 'manager',10,1200)' at line 1
+mysql>  insert into v4 values(1,'2024-2-2', 'manager',10,1200);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into v4 values(1,'2024-2-2', 'manager',10,1200);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select*from v4;
++-------+--------+------------+-------+--------+---------+
+| empno | ename  | hiredate   | job   | deptno | sal     |
++-------+--------+------------+-------+--------+---------+
+|  7934 | MILLER | 2012-05-02 | CLERK |     10 | 1300.00 |
++-------+--------+------------+-------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into v4 values(1,'2024-2-2','manager',10,1200);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> drop view v4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create view v4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create view v4
+    ->        as 
+    ->      select empno,ename,hiredate ,job,deptno ,sal
+    ->     from emp
+    ->      where(sal between 1000 and 2000)
+    ->     and deptno=10;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql>  insert into v4 values(1,'Ashmol','2024-2-2', 'manager',10,1200);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from v4;
++-------+--------+------------+---------+--------+---------+
+| empno | ename  | hiredate   | job     | deptno | sal     |
++-------+--------+------------+---------+--------+---------+
+|     1 | Ashmol | 2024-02-02 | manager |     10 | 1200.00 |
+|  7934 | MILLER | 2012-05-02 | CLERK   |     10 | 1300.00 |
++-------+--------+------------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> delete view v4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'v4' at line 1
+mysql> drop view v4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update emp1 set sal=50000
+    -> where empno=1234;
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> delete from v4 where empno=1;
+ERROR 1146 (42S02): Table 'mycdac.v4' doesn't exist
+mysql> select*from emp
+    ->  where  deptno=10;
++-------+--------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+--------+-----------+------+------------+---------+------+--------+
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 | NULL |     10 |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> create index sal_id on emp(sal desc);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> c
+    -> 
+    -> ^C
+mysql> select*from emp 
+    -> where sal>2000;
++-------+-------+-----------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 2012-01-15 | 5000.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST   | 7566 | 2012-01-10 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST   | 7566 | 2012-04-02 | 3000.00 | NULL |     20 |
+|  7566 | JONES | MANAGER   | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER   | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER   | 7839 | 2012-01-06 | 2450.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+6 rows in set (0.00 sec)
+
+mysql> create index comm_id on emp(job desc);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  select*from emp
+    -> where job in('manager','salesman');
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|     1 | Ashmol | manager  | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
++-------+--------+----------+------+------------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> drop index comm_id on emp;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create index jobsal_id on emp(job,sal);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> where job in('manager','salesman') and sal>1000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where job in('manager','salesman') and sal>1000' at line 1
+mysql> select*from emp
+    -> where job in('manager','salesman') and
+    ->  sal>1000;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|     1 | Ashmol | manager  | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7782 | CLARK  | MANAGER  | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> select*from emp
+    -> where job in('manager','salesman') and
+    ->  sal>1000;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|     1 | Ashmol | manager  | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7782 | CLARK  | MANAGER  | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> 
+mysql> create unique index ename_id on emp(ename);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> drop  unique index comm_id on emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique index comm_id on emp' at line 1
+mysql> drop index comm_id on emp;
+ERROR 1091 (42000): Can't DROP 'comm_id'; check that column/key exists
+mysql> Terminal close -- exit!
