@@ -1,0 +1,455 @@
+mysql> select*from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+15 rows in set (0.06 sec)
+
+mysql> select*from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.02 sec)
+
+mysql> select ename ,round(datediff(curdate(),hiredate)/365) as expr_yr
+    ->      from emp
+    -> where round (datediff(curdate(),hiredate)/365) >12;
++--------+---------+
+| ename  | expr_yr |
++--------+---------+
+| SMITH  |      13 |
+| ALLEN  |      13 |
+| BLAKE  |      13 |
+| CLARK  |      13 |
+| SCOTT  |      13 |
+| KING   |      13 |
+| TURNER |      13 |
+| JAMES  |      13 |
+| FORD   |      13 |
++--------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select ename,instr(ename,'le') as position from emp;
++--------+----------+
+| ename  | position |
++--------+----------+
+| ADAMS  |        0 |
+| ALLEN  |        3 |
+| Ashmol |        0 |
+| BLAKE  |        0 |
+| CLARK  |        0 |
+| FORD   |        0 |
+| JAMES  |        0 |
+| JONES  |        0 |
+| KING   |        0 |
+| MARTIN |        0 |
+| MILLER |        4 |
+| SCOTT  |        0 |
+| SMITH  |        0 |
+| TURNER |        0 |
+| WARD   |        0 |
++--------+----------+
+15 rows in set (0.05 sec)
+
+mysql> select ename,hiredate,adddate(hiredate,30)from emp;
++--------+------------+----------------------+
+| ename  | hiredate   | adddate(hiredate,30) |
++--------+------------+----------------------+
+| Ashmol | 2024-02-02 | 2024-03-03           |
+| SMITH  | 2012-02-02 | 2012-03-03           |
+| ALLEN  | 2012-01-02 | 2012-02-01           |
+| WARD   | 2013-01-02 | 2013-02-01           |
+| JONES  | 2013-01-02 | 2013-02-01           |
+| MARTIN | 2012-05-02 | 2012-06-01           |
+| BLAKE  | 2012-01-06 | 2012-02-05           |
+| CLARK  | 2012-01-06 | 2012-02-05           |
+| SCOTT  | 2012-01-10 | 2012-02-09           |
+| KING   | 2012-01-15 | 2012-02-14           |
+| TURNER | 2012-01-20 | 2012-02-19           |
+| ADAMS  | 2013-01-02 | 2013-02-01           |
+| JAMES  | 2012-03-02 | 2012-04-01           |
+| FORD   | 2012-04-02 | 2012-05-02           |
+| MILLER | 2012-05-02 | 2012-06-01           |
++--------+------------+----------------------+
+15 rows in set (0.01 sec)
+
+mysql> select ename,hiredate,adddate(hiredate,1825)from emp;
++--------+------------+------------------------+
+| ename  | hiredate   | adddate(hiredate,1825) |
++--------+------------+------------------------+
+| Ashmol | 2024-02-02 | 2029-01-31             |
+| SMITH  | 2012-02-02 | 2017-01-31             |
+| ALLEN  | 2012-01-02 | 2016-12-31             |
+| WARD   | 2013-01-02 | 2018-01-01             |
+| JONES  | 2013-01-02 | 2018-01-01             |
+| MARTIN | 2012-05-02 | 2017-05-01             |
+| BLAKE  | 2012-01-06 | 2017-01-04             |
+| CLARK  | 2012-01-06 | 2017-01-04             |
+| SCOTT  | 2012-01-10 | 2017-01-08             |
+| KING   | 2012-01-15 | 2017-01-13             |
+| TURNER | 2012-01-20 | 2017-01-18             |
+| ADAMS  | 2013-01-02 | 2018-01-01             |
+| JAMES  | 2012-03-02 | 2017-03-01             |
+| FORD   | 2012-04-02 | 2017-04-01             |
+| MILLER | 2012-05-02 | 2017-05-01             |
++--------+------------+------------------------+
+15 rows in set (0.00 sec)
+
+mysql> select*from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+15 rows in set (0.02 sec)
+
+mysql> select*from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> cross join
+    -> dept;
++-------+--------+-----------+------+------------+---------+---------+--------+--------+------------+----------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO | DEPTNO | DNAME      | LOC      |
++-------+--------+-----------+------+------------+---------+---------+--------+--------+------------+----------+
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |     40 | OPERATIONS | BOSTON   |
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |     30 | SALES      | CHICAGO  |
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |     20 | RESEARCH   | DALLAS   |
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |     10 | ACCOUNTING | NEW YORK |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |     40 | OPERATIONS | BOSTON   |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |     30 | SALES      | CHICAGO  |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |     20 | RESEARCH   | DALLAS   |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |     10 | ACCOUNTING | NEW YORK |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |     40 | OPERATIONS | BOSTON   |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |     30 | SALES      | CHICAGO  |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |     20 | RESEARCH   | DALLAS   |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |     40 | OPERATIONS | BOSTON   |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |     30 | SALES      | CHICAGO  |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |     20 | RESEARCH   | DALLAS   |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |     40 | OPERATIONS | BOSTON   |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |     30 | SALES      | CHICAGO  |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |     20 | RESEARCH   | DALLAS   |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |     10 | ACCOUNTING | NEW YORK |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |     40 | OPERATIONS | BOSTON   |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |     30 | SALES      | CHICAGO  |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |     20 | RESEARCH   | DALLAS   |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |     40 | OPERATIONS | BOSTON   |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |     30 | SALES      | CHICAGO  |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |     20 | RESEARCH   | DALLAS   |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |     40 | OPERATIONS | BOSTON   |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |     30 | SALES      | CHICAGO  |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |     20 | RESEARCH   | DALLAS   |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |     10 | ACCOUNTING | NEW YORK |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |     40 | OPERATIONS | BOSTON   |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |     30 | SALES      | CHICAGO  |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |     20 | RESEARCH   | DALLAS   |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |     10 | ACCOUNTING | NEW YORK |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |     40 | OPERATIONS | BOSTON   |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |     30 | SALES      | CHICAGO  |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |     20 | RESEARCH   | DALLAS   |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |     10 | ACCOUNTING | NEW YORK |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |     40 | OPERATIONS | BOSTON   |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |     30 | SALES      | CHICAGO  |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |     20 | RESEARCH   | DALLAS   |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |     40 | OPERATIONS | BOSTON   |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |     30 | SALES      | CHICAGO  |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |     20 | RESEARCH   | DALLAS   |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |     10 | ACCOUNTING | NEW YORK |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |     40 | OPERATIONS | BOSTON   |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |     30 | SALES      | CHICAGO  |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |     20 | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |     10 | ACCOUNTING | NEW YORK |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |     40 | OPERATIONS | BOSTON   |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |     30 | SALES      | CHICAGO  |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |     20 | RESEARCH   | DALLAS   |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |     10 | ACCOUNTING | NEW YORK |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |     40 | OPERATIONS | BOSTON   |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |     30 | SALES      | CHICAGO  |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |     20 | RESEARCH   | DALLAS   |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |     10 | ACCOUNTING | NEW YORK |
++-------+--------+-----------+------+------------+---------+---------+--------+--------+------------+----------+
+60 rows in set (0.03 sec)
+
+mysql> select ename,job,sal,dname,loc,deptno
+    -> from emp
+    -> cross join
+    -> dept
+    -> where sal between 1000 and 2000;
+ERROR 1052 (23000): Column 'deptno' in field list is ambiguous
+mysql> select ename,job,sal,dname,loc
+    -> from emp
+    -> cross join
+    -> dept
+    -> where sal between 1000 and 2000;
++--------+----------+---------+------------+----------+
+| ename  | job      | sal     | dname      | loc      |
++--------+----------+---------+------------+----------+
+| ALLEN  | SALESMAN | 1600.00 | OPERATIONS | BOSTON   |
+| ALLEN  | SALESMAN | 1600.00 | SALES      | CHICAGO  |
+| ALLEN  | SALESMAN | 1600.00 | RESEARCH   | DALLAS   |
+| ALLEN  | SALESMAN | 1600.00 | ACCOUNTING | NEW YORK |
+| TURNER | SALESMAN | 1500.00 | OPERATIONS | BOSTON   |
+| TURNER | SALESMAN | 1500.00 | SALES      | CHICAGO  |
+| TURNER | SALESMAN | 1500.00 | RESEARCH   | DALLAS   |
+| TURNER | SALESMAN | 1500.00 | ACCOUNTING | NEW YORK |
+| MILLER | CLERK    | 1300.00 | OPERATIONS | BOSTON   |
+| MILLER | CLERK    | 1300.00 | SALES      | CHICAGO  |
+| MILLER | CLERK    | 1300.00 | RESEARCH   | DALLAS   |
+| MILLER | CLERK    | 1300.00 | ACCOUNTING | NEW YORK |
+| WARD   | SALESMAN | 1250.00 | OPERATIONS | BOSTON   |
+| WARD   | SALESMAN | 1250.00 | SALES      | CHICAGO  |
+| WARD   | SALESMAN | 1250.00 | RESEARCH   | DALLAS   |
+| WARD   | SALESMAN | 1250.00 | ACCOUNTING | NEW YORK |
+| MARTIN | SALESMAN | 1250.00 | OPERATIONS | BOSTON   |
+| MARTIN | SALESMAN | 1250.00 | SALES      | CHICAGO  |
+| MARTIN | SALESMAN | 1250.00 | RESEARCH   | DALLAS   |
+| MARTIN | SALESMAN | 1250.00 | ACCOUNTING | NEW YORK |
+| Ashmol | manager  | 1200.00 | OPERATIONS | BOSTON   |
+| Ashmol | manager  | 1200.00 | SALES      | CHICAGO  |
+| Ashmol | manager  | 1200.00 | RESEARCH   | DALLAS   |
+| Ashmol | manager  | 1200.00 | ACCOUNTING | NEW YORK |
+| ADAMS  | CLERK    | 1100.00 | OPERATIONS | BOSTON   |
+| ADAMS  | CLERK    | 1100.00 | SALES      | CHICAGO  |
+| ADAMS  | CLERK    | 1100.00 | RESEARCH   | DALLAS   |
+| ADAMS  | CLERK    | 1100.00 | ACCOUNTING | NEW YORK |
++--------+----------+---------+------------+----------+
+28 rows in set (0.02 sec)
+
+mysql> select ename,job,sal,dname,loc,d.deptno
+    -> from emp e
+    -> cross join
+    -> dept d
+    -> where sal between 1000 and 2000;
++--------+----------+---------+------------+----------+--------+
+| ename  | job      | sal     | dname      | loc      | deptno |
++--------+----------+---------+------------+----------+--------+
+| ALLEN  | SALESMAN | 1600.00 | OPERATIONS | BOSTON   |     40 |
+| ALLEN  | SALESMAN | 1600.00 | SALES      | CHICAGO  |     30 |
+| ALLEN  | SALESMAN | 1600.00 | RESEARCH   | DALLAS   |     20 |
+| ALLEN  | SALESMAN | 1600.00 | ACCOUNTING | NEW YORK |     10 |
+| TURNER | SALESMAN | 1500.00 | OPERATIONS | BOSTON   |     40 |
+| TURNER | SALESMAN | 1500.00 | SALES      | CHICAGO  |     30 |
+| TURNER | SALESMAN | 1500.00 | RESEARCH   | DALLAS   |     20 |
+| TURNER | SALESMAN | 1500.00 | ACCOUNTING | NEW YORK |     10 |
+| MILLER | CLERK    | 1300.00 | OPERATIONS | BOSTON   |     40 |
+| MILLER | CLERK    | 1300.00 | SALES      | CHICAGO  |     30 |
+| MILLER | CLERK    | 1300.00 | RESEARCH   | DALLAS   |     20 |
+| MILLER | CLERK    | 1300.00 | ACCOUNTING | NEW YORK |     10 |
+| WARD   | SALESMAN | 1250.00 | OPERATIONS | BOSTON   |     40 |
+| WARD   | SALESMAN | 1250.00 | SALES      | CHICAGO  |     30 |
+| WARD   | SALESMAN | 1250.00 | RESEARCH   | DALLAS   |     20 |
+| WARD   | SALESMAN | 1250.00 | ACCOUNTING | NEW YORK |     10 |
+| MARTIN | SALESMAN | 1250.00 | OPERATIONS | BOSTON   |     40 |
+| MARTIN | SALESMAN | 1250.00 | SALES      | CHICAGO  |     30 |
+| MARTIN | SALESMAN | 1250.00 | RESEARCH   | DALLAS   |     20 |
+| MARTIN | SALESMAN | 1250.00 | ACCOUNTING | NEW YORK |     10 |
+| Ashmol | manager  | 1200.00 | OPERATIONS | BOSTON   |     40 |
+| Ashmol | manager  | 1200.00 | SALES      | CHICAGO  |     30 |
+| Ashmol | manager  | 1200.00 | RESEARCH   | DALLAS   |     20 |
+| Ashmol | manager  | 1200.00 | ACCOUNTING | NEW YORK |     10 |
+| ADAMS  | CLERK    | 1100.00 | OPERATIONS | BOSTON   |     40 |
+| ADAMS  | CLERK    | 1100.00 | SALES      | CHICAGO  |     30 |
+| ADAMS  | CLERK    | 1100.00 | RESEARCH   | DALLAS   |     20 |
+| ADAMS  | CLERK    | 1100.00 | ACCOUNTING | NEW YORK |     10 |
++--------+----------+---------+------------+----------+--------+
+28 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> 
+mysql> ^C
+mysql> select ename,sal,job,dname,loc,d.deptno
+    -> from emp e,dept d
+    -> where d.deptno=e.deptno;
++--------+---------+-----------+------------+----------+--------+
+| ename  | sal     | job       | dname      | loc      | deptno |
++--------+---------+-----------+------------+----------+--------+
+| Ashmol | 1200.00 | manager   | ACCOUNTING | NEW YORK |     10 |
+| SMITH  |  800.00 | CLERK     | RESEARCH   | DALLAS   |     20 |
+| ALLEN  | 1600.00 | SALESMAN  | SALES      | CHICAGO  |     30 |
+| WARD   | 1250.00 | SALESMAN  | SALES      | CHICAGO  |     30 |
+| JONES  | 2975.00 | MANAGER   | RESEARCH   | DALLAS   |     20 |
+| MARTIN | 1250.00 | SALESMAN  | SALES      | CHICAGO  |     30 |
+| BLAKE  | 2850.00 | MANAGER   | SALES      | CHICAGO  |     30 |
+| CLARK  | 2450.00 | MANAGER   | ACCOUNTING | NEW YORK |     10 |
+| SCOTT  | 3000.00 | ANALYST   | RESEARCH   | DALLAS   |     20 |
+| KING   | 5000.00 | PRESIDENT | ACCOUNTING | NEW YORK |     10 |
+| TURNER | 1500.00 | SALESMAN  | SALES      | CHICAGO  |     30 |
+| ADAMS  | 1100.00 | CLERK     | RESEARCH   | DALLAS   |     20 |
+| JAMES  |  950.00 | CLERK     | SALES      | CHICAGO  |     30 |
+| FORD   | 3000.00 | ANALYST   | RESEARCH   | DALLAS   |     20 |
+| MILLER | 1300.00 | CLERK     | ACCOUNTING | NEW YORK |     10 |
++--------+---------+-----------+------------+----------+--------+
+15 rows in set (0.01 sec)
+
+mysql> select ename,job,hiredate,dname
+    -> from emp e,dept d
+    -> where d.deptno in (10,20) and sal>1000;
++--------+-----------+------------+------------+
+| ename  | job       | hiredate   | dname      |
++--------+-----------+------------+------------+
+| Ashmol | manager   | 2024-02-02 | RESEARCH   |
+| Ashmol | manager   | 2024-02-02 | ACCOUNTING |
+| ALLEN  | SALESMAN  | 2012-01-02 | RESEARCH   |
+| ALLEN  | SALESMAN  | 2012-01-02 | ACCOUNTING |
+| WARD   | SALESMAN  | 2013-01-02 | RESEARCH   |
+| WARD   | SALESMAN  | 2013-01-02 | ACCOUNTING |
+| JONES  | MANAGER   | 2013-01-02 | RESEARCH   |
+| JONES  | MANAGER   | 2013-01-02 | ACCOUNTING |
+| MARTIN | SALESMAN  | 2012-05-02 | RESEARCH   |
+| MARTIN | SALESMAN  | 2012-05-02 | ACCOUNTING |
+| BLAKE  | MANAGER   | 2012-01-06 | RESEARCH   |
+| BLAKE  | MANAGER   | 2012-01-06 | ACCOUNTING |
+| CLARK  | MANAGER   | 2012-01-06 | RESEARCH   |
+| CLARK  | MANAGER   | 2012-01-06 | ACCOUNTING |
+| SCOTT  | ANALYST   | 2012-01-10 | RESEARCH   |
+| SCOTT  | ANALYST   | 2012-01-10 | ACCOUNTING |
+| KING   | PRESIDENT | 2012-01-15 | RESEARCH   |
+| KING   | PRESIDENT | 2012-01-15 | ACCOUNTING |
+| TURNER | SALESMAN  | 2012-01-20 | RESEARCH   |
+| TURNER | SALESMAN  | 2012-01-20 | ACCOUNTING |
+| ADAMS  | CLERK     | 2013-01-02 | RESEARCH   |
+| ADAMS  | CLERK     | 2013-01-02 | ACCOUNTING |
+| FORD   | ANALYST   | 2012-04-02 | RESEARCH   |
+| FORD   | ANALYST   | 2012-04-02 | ACCOUNTING |
+| MILLER | CLERK     | 2012-05-02 | RESEARCH   |
+| MILLER | CLERK     | 2012-05-02 | ACCOUNTING |
++--------+-----------+------------+------------+
+26 rows in set (0.02 sec)
+
+mysql> 
+mysql> 
+mysql> select* from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|     1 | Ashmol | manager   | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7369 | SMITH  | CLERK     | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 2012-01-06 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 2012-01-15 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 2012-05-02 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+15 rows in set (0.00 sec)
+
+mysql> select*from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create table  location(
+    -> loc varchar(20),
+    -> remark varchar(20));
+Query OK, 0 rows affected (0.85 sec)
+
+mysql> 
+mysql> insert into location values('NEW YORK', 'remark 1');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into location values('DALLAS', 'remark 2');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into location values('CHICAGO', 'remark 3');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into location values('BOSTON', 'remark 4');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> select ename,sal,dname,d.deptno,l.loc,remark
+    -> from  emp e,dept d,location 1
+    -> where e.deptno=d.deptno and d.loc=l.loc
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1
+where e.deptno=d.deptno and d.loc=l.loc' at line 2
+mysql> select ename,sal,dname,d.deptno,l.loc,remark
+    -> from  emp e,dept d,location 1
+    -> where e.deptno=d.deptno and d.loc=l.loc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1
+where e.deptno=d.deptno and d.loc=l.loc' at line 2
+mysql> select ename,sal,dname,d.deptno,l.loc,remark
+    -> from  emp e,dept d,location l
+    -> where e.deptno=d.deptno and d.loc=l.loc;
++--------+---------+------------+--------+----------+----------+
+| ename  | sal     | dname      | deptno | loc      | remark   |
++--------+---------+------------+--------+----------+----------+
+| Ashmol | 1200.00 | ACCOUNTING |     10 | NEW YORK | remark 1 |
+| SMITH  |  800.00 | RESEARCH   |     20 | DALLAS   | remark 2 |
+| ALLEN  | 1600.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| WARD   | 1250.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| JONES  | 2975.00 | RESEARCH   |     20 | DALLAS   | remark 2 |
+| MARTIN | 1250.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| BLAKE  | 2850.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| CLARK  | 2450.00 | ACCOUNTING |     10 | NEW YORK | remark 1 |
+| SCOTT  | 3000.00 | RESEARCH   |     20 | DALLAS   | remark 2 |
+| KING   | 5000.00 | ACCOUNTING |     10 | NEW YORK | remark 1 |
+| TURNER | 1500.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| ADAMS  | 1100.00 | RESEARCH   |     20 | DALLAS   | remark 2 |
+| JAMES  |  950.00 | SALES      |     30 | CHICAGO  | remark 3 |
+| FORD   | 3000.00 | RESEARCH   |     20 | DALLAS   | remark 2 |
+| MILLER | 1300.00 | ACCOUNTING |     10 | NEW YORK | remark 1 |
++--------+---------+------------+--------+----------+----------+
+15 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

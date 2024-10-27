@@ -1,0 +1,386 @@
+** display the name of emp having expr>12 yr
+
+--> select ename ,round(datediff(curdate(),hiredate)/365) as expr_yr
+     from emp
+where round (datediff(curdate(),hiredate)/365) >12;
+
+
+==================**********************============
+** display the position where ''le'' is occurring
+---> select ename,instr(ename,'le') as position from emp;
+
+==================**********************============
+   ** show the names ,date on which they have a completed 5 yr
+--->  select ename,hiredate,adddate(hiredate,30)from emp;
+
+
+==================**********************============
+** show the names ,date on which they have a completed 5 yr
+--->  select ename,hiredate,adddate(hiredate,1825)from emp;
+==================**********************============
+
+mysql> select * from emp
+    cross join
+     dept;
+
+==================**********************============
+select ename,job,sal,dname,loc
+from emp
+cross join
+dept
+where sal between 1000 and 2000;
+
+==================**********************=========================
+
+** if there is ambiguous for direct use deptno  then we have to use (d.deptno,from emp e,dept d)
+select ename,job,sal,dname,loc,d.deptno
+from emp e
+cross join
+dept d
+where sal between 1000 and 2000;
+
+
+==================**********************=============================
+
+** Inner join (ifv there is an ambiguity error use alias)
+
+ select ename,sal,job,dname,loc,d.deptno
+from emp e,dept d
+where d.deptno=e.deptno;
+
+==================**********************============
+** use the inner join  to display empno,job,hiredate,dname for emp  from deptno 10 and 20 and  sal>1000
+
+ select ename,job,hiredate,dname
+from emp e,dept d
+where d.deptno in (10,20) and sal>1000;
+
+
+==================**********************==========================
+  ** JOINING 3 TABLES
+select* from emp;
+select*from dept;
+
+create table  location(
+loc varchar(20),
+remark varchar(20));
+
+
+insert into location values('NEW YORK', 'remark 1');
+insert into location values('DALLAS', 'remark 2');
+insert into location values('CHICAGO', 'remark 3');
+insert into location values('BOSTON', 'remark 4');
+
+
+* join 3 tables(employee,department,location)
+
+select ename,sal,dname,d.deptno,l.loc,remark
+from  emp e,dept d,location l
+where e.deptno=d.deptno and d.loc=l.loc;
+
+==================**********************==========================
+ ** create view  using 2 tables
+
+select* from v6;
+
+ create view v6
+as
+select ename,sal,job,dname,d.deptno
+from emp e,dept d
+where d.deptno=e.deptno;
+
+==================**********************==========================
+
+left outer join
+
+select ename,sal,d.deptno,dname
+from emp e
+left join
+dept d
+on( e.deptno=d.deptno);
+
+==================**********************==========================
+
+right outer join
+
+select ename,sal,d.deptno,dname
+from emp e
+right join
+dept d
+on( e.deptno=d.deptno);
+
+
+==================**********************==========================
+
+** note: we can expect the null values in outer join
+
+**  full outer join is not working in MySQL
+  in oracle:
+select ename,sal,d.deptno,dname
+from emp e
+full outer join
+dept d
+on( e.deptno=d.deptno);
+
+
+==================**********************==========================
+** self join
+
+display the name of the emp and his manager name details
+
+select a.ename,b.ename as mgr_name
+from emp a,emp b
+where a.mgr=b.empno;
+
+
+==================**********************==========================
+
+
+**display the name of the emp ,hiredate and his manager name and  hiredate details
+
+select a.ename,a.hiredate , b.ename as mgr_name, b.hiredate mgr_hiredate
+from emp a,emp b
+where a.mgr=b.empno;
+
+
+
+==================**********************==========================
+
+** NON-EQUI JOIN    
+ 
+we use operators !,=,<,>,<=,>= 
+
+ select a.ename,a.job,a.deptno,b.ename ,b.job,b.deptno
+from emp a,emp b
+where a.job=b.job and a.deptno != b.deptno;
+
+
+==================****************************========================
+**PLSQL
+  * crate variables
+1.set@a:=100;
+select@a;
+
+
+2.set@b:=100;
+select@b;
+
+
+==================****************************========================
+
+
+create a variable  name as name 1 store your name ,"add" store address score store your marks
+
+set@name 1='Ashvini';
+set@add:='pune';
+set@score:=88;
+select@name1;
+select@add;
+select@score;
+
+==================****************************========================
+
+** fetching the data from the table
+
+select @max:=max(sal),@min:=min(sal) from emp;
+select@min;
+select@max;
+
+
+
+select @max:=max(sal),@min:=min(sal),@avg:=avg(sal) from emp;
+select@min;
+select@max;
+select@avg;
+
+==================****************************========================
+
+** STORED  PROCDURE
+
+** TO CREATE PROCEDURE
+
+set autocommit=0;
+ 
+delimiter  $$     // there is space between delimiter and $$
+create procedure proce1()   // thre is no space in between proce and 1= proce1
+begin
+select* from emp where deptno=10;
+select* from dept;
+ select* from emp where ename='smith';
+end;
+$$
+
+
+* to execute procedure
+
+ delimiter ;   // ther is sac in between delimiter and semicoln
+call proce1();
+
+
+ * to drop procedure
+
+drop procedure proce1;
+
+======================******************************======================
+
+
+*create a procedure proce2 to display the details of allen and ford ,increase the sal for all the employees b 100,display th max salary 
+
+set autocommit=0;
+
+
+delimiter  $$  
+create procedure proce2()  
+begin
+ select* from emp where ename in('allen' , 'ford');
+update emp set sal =sal+100;
+select@max :=max(sal) from emp;
+select@max;
+end;
+$$
+
+
+* to execute
+
+ delimiter ;
+set autocommit;
+call proce2();
+
+
+  rollback;
+======================******************************======================
+*create a procedure proce3 to update the sal of al emp by 10%
+
+display the ename,hiredate and the sal
+delete the records for dept 30  and whose sal>2000
+show all the records after deletion ,execute procedure
+
+
+delimiter  $$  
+create procedure proce3()  
+begin
+update emp set sal =sal*1.1;
+select ename ,hiredate, sal from emp;
+delete from emp where deptno=30 and sal>2000;
+select*from emp;
+end;
+$$
+
+
+
+* to execute
+
+ delimiter ;
+set autocommit;
+call proce3();
+
+rollback;
+
+======================******************************==================
+
+** to show al the procedures
+
+ show procedure status where db='cdac';
+
+ if  condition
+
+1)
+if cond then
+------
+------
+else
+-----
+-----
+end if;
+
+2)
+if cond then
+------
+------
+else if cond then
+-----
+-----
+end if;
+
+=======================*****************************=======================
+** to create procedure to declare 2 variables and compare
+
+delimiter  //
+create procedure if_proce3()
+begin 
+declare result varchar(20);
+set@a :=100;
+set@b :=200;
+if(@a>@b) then
+set@result :='a is greater' ;
+ elseif (@a<@b)then
+set@result :='b is greater' ;
+ else
+set@result :='both are same';
+end if;
+select@result;
+end;
+//
+
+
+* to execute
+delimiter ;
+set autocommit=0;
+call proce3();
+
+rollback;
+
+=================******************************==========================
+
+** types of pareameters
+
+1) in : input is default
+2) out : output
+3) in out : input and output
+
+* accept a number from the user and check whether the  number is 1,digit 2,digit 3,digit 4
+
+
+delimiter $$
+create procedure indemo(in num int)
+begin
+declare result  varchar(20);
+
+if( num>=0 && num<10)then
+   set @result:=' it is one digit number';
+else if ( num>=10 && num<100)then
+    set @result:=' it is two digit number';
+else  if( num>=100 && num<1000)then
+     set @result:=' it is three digit number';
+else  if( num>=1000 && num<10000)then
+     set @result:=' it is four digit number';
+else
+    set @result:='greater digit number';
+end if;
+   select @result;
+end;
+$$
+ 
+
+* to execute
+delimiter :
+set autocommit =0;
+call indemo(6);
+
+rollback;
+
+===========************************===============================
+* create a procedure to accept a  empno and if the salary is <5000 then the update th sal for the emp by
+2000 an return te updated salary and commsion 
+
+
+delimiter $$
+create  procedure utdemo1(in pempno int, out psal int, out pcomm int)
+begin
+    declare vsal int;
+    select @vsal := sal from emp where empno = pempno;
+    if @vsal < 5000 then
+        update emp set sal = sal + 2000  where empno = pempno;
+        select sal, comm into psal, pcomm from emp where empno = pempno;
+    end if;
+end $$
